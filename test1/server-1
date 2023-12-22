@@ -1,0 +1,28 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region  = "us-east-2"
+  profile = "default"
+}
+
+resource "aws_s3_bucket" "firsts3" {
+  bucket = "mys316122023"
+  acl    = "private"
+
+  tags = {
+    Name        = "s3.terraform.demo"
+    Environment = " dev"
+  }
+}
+output "s3_bucket" {
+
+  value = "aws_s3_bucket.firsts3.id"
+}
